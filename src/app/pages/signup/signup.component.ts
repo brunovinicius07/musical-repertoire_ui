@@ -7,7 +7,7 @@ import { LoginService } from '../../service/login.service';
 import { ToastrService } from 'ngx-toastr';
 
 interface SignupForm {
-  name: FormControl,
+  nmUser: FormControl,
   email: FormControl,
   password: FormControl,
   passwordConfirm: FormControl
@@ -36,7 +36,7 @@ export class SignupComponent {
     private toastService: ToastrService
   ){
     this.signupForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      nmUser: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(6)])
@@ -45,8 +45,8 @@ export class SignupComponent {
   }
 
   submit(){
-    this.loginService.login(this.signupForm.value.email, this.signupForm.value.password).subscribe({
-      next: () => this.toastService.success("Login realizado com sucesso!"),
+    this.loginService.signup(this.signupForm.value.nmUser, this.signupForm.value.email, this.signupForm.value.password).subscribe({
+      next: () => this.toastService.success("Registro realizado com sucesso!"),
       error: () => this.toastService.error("Erro inesperado! Tente novamente mais tarde!")
     })
   }

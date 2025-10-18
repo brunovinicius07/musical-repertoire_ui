@@ -9,12 +9,22 @@ import { tap } from 'rxjs';
 export class LoginService {
 
   constructor(private httpClient: HttpClient) { }
+  apiUrl: string = "http://localhost/v1/music/auth";
 
-  login(name: string, password: string){
-    return this.httpClient.post<LoginResponse>("/login", {name, password}).pipe(
+  login(email: string, password: string){
+    return this.httpClient.post<LoginResponse>(this.apiUrl + "/login", {email, password}).pipe(
       tap((value) => {
         sessionStorage.setItem("auth-token", value.token)
-        sessionStorage.setItem("username", value.name)
+        sessionStorage.setItem("username", value.nmUser)
+      })
+    )
+  }
+
+  signup(nmUser: string, email: string, password: string){
+    return this.httpClient.post<LoginResponse>(this.apiUrl + "/register", {nmUser, email, password}).pipe(
+      tap((value) => {
+        sessionStorage.setItem("auth-token", value.token)
+        sessionStorage.setItem("username", value.nmUser)
       })
     )
   }
