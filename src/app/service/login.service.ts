@@ -15,16 +15,16 @@ export class LoginService {
     return this.httpClient.post<LoginResponse>(this.apiUrl + "/login", {email, password}).pipe(
       tap((value) => {
         sessionStorage.setItem("auth-token", value.token)
-        sessionStorage.setItem("username", value.nmUser)
+        sessionStorage.setItem("username", value.nameUser)
       })
     )
   }
 
-  signup(nmUser: string, email: string, password: string){
-    return this.httpClient.post<LoginResponse>(this.apiUrl + "/register", {nmUser, email, password}).pipe(
+  signup(nameUser: string, email: string, password: string){
+    return this.httpClient.post<LoginResponse>(this.apiUrl + "/register", {nameUser, email, password}).pipe(
       tap((value) => {
         sessionStorage.setItem("auth-token", value.token)
-        sessionStorage.setItem("username", value.nmUser)
+        sessionStorage.setItem("username", value.nameUser)
       })
     )
   }
