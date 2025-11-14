@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginResponse } from '../types/login-response.type';
-import { tap } from 'rxjs';
+import { tap, Observable  } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { tap } from 'rxjs';
 export class LoginService {
 
   constructor(private httpClient: HttpClient) { }
-  apiUrl: string = "http://localhost/v1/music/auth";
+  apiUrl: string = "http://localhost:8080/v1/music/auth";
 
   login(email: string, password: string){
     return this.httpClient.post<LoginResponse>(this.apiUrl + "/login", {email, password}).pipe(
@@ -27,5 +27,13 @@ export class LoginService {
         sessionStorage.setItem("username", value.nameUser)
       })
     )
+  }
+
+  forgotPassword(email: string): Observable<string> {
+    return this.httpClient.put(
+      this.apiUrl + "/forgotPassword",
+      { email },
+      { responseType: 'text' as const }
+    );
   }
 }

@@ -10,3 +10,34 @@
 html, body {
     height: 100%;
 }
+
+.toast-success,
+.toast-error,
+.toast-info,
+.toast-warning {
+  width: 480px !important;
+  max-width: 90vw;
+  white-space: normal !important;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+#toast-container > div {
+  padding: 16px 20px !important;
+  padding-left: 55px !important;
+  border-radius: 10px !important;
+}
+
+#toast-container .toast-success .toast-icon,
+#toast-container .toast-error .toast-icon,
+#toast-container .toast-info .toast-icon,
+#toast-container .toast-warning .toast-icon {
+  top: 50% !important;
+  transform: translateY(-50%);
+  left: 20px !important;
+  font-size: 22px !important;
+}
+
+.toast-message {
+  font-weight: 500;
+}
