@@ -40,10 +40,14 @@ export class LoginComponent {
   }
 
   submit(){
-    this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
-      next: () => this.toastService.success("Login realizado com sucesso!"),
-      error: () => this.toastService.error("Email ou senha inválidos!")
-    })
+      this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+    next: () => {
+      this.toastService.success("Login realizado com sucesso!");
+      this.router.navigate(["/dashboard"]);   // 🔥 aqui
+    },
+    error: () => this.toastService.error("Email ou senha inválidos!")
+  });
+
   }
 
   navigate(){

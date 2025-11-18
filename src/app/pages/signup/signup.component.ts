@@ -7,10 +7,10 @@ import { LoginService } from '../../service/login.service';
 import { ToastrService } from 'ngx-toastr';
 
 interface SignupForm {
-  nmUser: FormControl,
+  nameUser: FormControl,
   email: FormControl,
   password: FormControl,
-  passwordConfirm: FormControl
+  confirmNewPassword: FormControl
 }
 
 @Component({
@@ -36,22 +36,34 @@ export class SignupComponent {
     private toastService: ToastrService
   ){
     this.signupForm = new FormGroup({
-      nmUser: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      nameUser: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(6)])
-
+      confirmNewPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
     })
   }
 
-  submit(){
-    this.loginService.signup(this.signupForm.value.nmUser, this.signupForm.value.email, this.signupForm.value.password).subscribe({
-      next: () => this.toastService.success("Registro realizado com sucesso!"),
-      error: () => this.toastService.error("Verifique suas credencias!")
-    })
+  submit() {
+  if (this.signupForm.value.password !== this.signupForm.value.confirmNewPassword) {
+    this.toastService.error("As senhas não coincidem!");
+    return;
   }
+
+  this.loginService.signup(
+    this.signupForm.value.nameUser!,
+    this.signupForm.value.email!,
+    this.signupForm.value.password!,
+    this.signupForm.value.confirmNewPassword!
+  ).subscribe({
+    next: () => {
+      this.router.navigate(["/dashboard"]);
+    },
+    error: () => this.toastService.error("Não foi possível criar a conta!")
+  });
+
+}
 
   navigate(){
-    this.router.navigate(["login"])
+    this.router.navigate(["/login"])
   }
 }

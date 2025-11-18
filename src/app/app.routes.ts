@@ -4,6 +4,8 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { UserComponent } from './pages/user/user.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { AuthGuard } from './service/auth-guard.service';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+
 
 export const routes: Routes = [
   {
@@ -19,8 +21,13 @@ export const routes: Routes = [
     component: ForgotPasswordComponent
   },
   {
-    path: "user",
-    component: UserComponent,
-    canActivate: [AuthGuard]
-  }
+  path: "dashboard",
+  component: DashboardComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path: "user",
+  component: UserComponent,
+  canActivate: [AuthGuard]
+}
 ];
