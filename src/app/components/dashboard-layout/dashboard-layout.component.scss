@@ -1,0 +1,355 @@
+:root {
+  --primary: #7001FD;
+  --secondary: #1E2772;
+  --text: #555;
+  --bg: #F1F3F6;
+  --white: #fff;
+  --gray: #EEEEEE;
+}
+
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  background: var(--bg);
+  font-family: "Inter", sans-serif;
+  transition: .3s ease-in-out;
+}
+
+/* ============================
+        SIDEBAR
+=============================== */
+.sidebar {
+  width: 260px;
+  background: var(--white);
+  padding: 32px 18px 25px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #e2e2e2;
+  box-shadow: 4px 0 25px rgba(0,0,0,.05);
+  border-radius: 0 20px 20px 0;
+  transition: width .3s ease, padding .3s ease;
+}
+
+.dashboard-container.collapsed .sidebar {
+  width: 80px;
+  padding: 25px 10px;
+}
+
+.dashboard-container.collapsed nav a span,
+.dashboard-container.collapsed .logout span {
+  display: none !important;
+}
+
+.dashboard-container.collapsed nav a {
+  justify-content: center;
+}
+
+.dashboard-container.collapsed .content {
+  padding-left: 40px !important;
+}
+
+/* ============================
+      TOP BUTTONS
+=============================== */
+.top-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+  padding-top: 10px;
+  gap: 12px;
+}
+
+.dashboard-container.collapsed .top-controls {
+  flex-direction: column;
+  gap: 14px;
+}
+
+.toggle-line-btn,
+.theme-btn {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: .25s;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+.toggle-line-btn:hover,
+.theme-btn:hover {
+  background: #f4f4f4;
+  transform: scale(1.05);
+}
+
+.toggle-line-btn span {
+  width: 22px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 5px;
+  transition: .25s;
+}
+
+.dashboard-container.collapsed .toggle-line-btn span {
+  transform: rotate(90deg);
+}
+
+.theme-btn i {
+  color: var(--primary);
+  font-size: 22px;
+}
+
+/* ============================
+          LOGO AREA
+=============================== */
+.logo-area {
+  text-align: center;
+  margin-top: 35px;
+  margin-bottom: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: .3s;
+}
+
+.logo-full {
+  width: 150px;
+}
+
+.logo-mini {
+  width: 45px;
+  height: 45px;
+  opacity: 0.9;
+}
+
+.dashboard-container.collapsed .logo-area {
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+/* ============================
+        MENU LINKS
+=============================== */
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 10px;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: var(--text);
+  text-decoration: none;
+  transition: .25s;
+  font-weight: 500;
+}
+
+nav a i {
+  font-size: 22px;
+  color: var(--primary);
+}
+
+nav a:hover {
+  background: rgba(112,1,253,0.12);
+  transform: translateX(5px);
+}
+
+nav a.active {
+  background: var(--primary);
+  color: white !important;
+}
+
+nav a.active i {
+  color: white;
+}
+
+/* ============================
+        LOGOUT BUTTON
+=============================== */
+.logout {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ff4d4d;
+  cursor: pointer;
+  padding: 12px 14px;
+  border-radius: 10px;
+  transition: .25s;
+  font-weight: 500;
+}
+
+.logout:hover {
+  background: #ffe5e5;
+  transform: translateX(5px);
+}
+
+/* ============================
+        CONTENT AREA
+=============================== */
+.content {
+  flex: 1;
+  padding: 50px 70px;
+  transition: .3s;
+}
+
+/* ============================
+          DIVISOR
+=============================== */
+.menu-divider {
+  width: 100%;
+  height: 1px;
+  margin: 18px 0 22px;
+  background: rgba(0,0,0,0.10);
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+body.dark-mode .menu-divider {
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 0 10px rgba(255,255,255,0.05);
+}
+
+/* ============================
+     RESPONSIVIDADE
+=============================== */
+@media (max-width: 938px) {
+
+  .dashboard-container.collapsed .sidebar {
+    width: 75px !important;
+    padding: 22px 8px !important;
+  }
+
+  .toggle-line-btn {
+    display: none !important;
+  }
+
+  .logo-full { display: none !important; }
+  .logo-mini { display: block !important; }
+
+  nav a span { display: none !important; }
+  nav a { justify-content: center !important; }
+
+  .content {
+    padding-left: 35px !important;
+    padding-right: 35px !important;
+  }
+
+  /* =====================================================================
+   📱 AJUSTE DA LOGO NO MENU PARA MOBILE
+===================================================================== */
+  @media (max-width: 600px) {
+
+    .content {
+      padding: 40px 25px !important;
+      padding-bottom: 0 !important;  /* <<< ESSENCIAL para remover o espaço branco */
+    }
+
+    .logo-area {
+      margin-top: 10px !important;
+      margin-bottom: 10px !important;
+    }
+
+    .logo-full {
+      width: 75px !important;     /* <<< diminui a logo grande */
+    }
+
+    .logo-mini {
+      width: 32px !important;     /* <<< quando o menu está colapsado */
+      height: 32px !important;
+    }
+  }
+
+  /* ============================================================
+   📱 AJUSTES PARA CELULARES MUITO PEQUENOS (ex: iPhone SE — 320px)
+============================================================ */
+
+@media (max-width: 360px) {
+
+  /* Sidebar ainda menor */
+  .sidebar {
+    width: 55px !important;
+    padding: 15px 6px !important;
+  }
+
+  .logo-mini {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  nav a i {
+    font-size: 20px !important;
+  }
+
+  .logout i {
+    font-size: 18px !important;
+  }
+
+  /* Remove QUALQUER texto que sobrar */
+  nav a span,
+  .logout span {
+    display: none !important;
+  }
+
+  /* Área de conteúdo deve ocupar todo espaço possível */
+  .content {
+    padding: 15px !important;
+  }
+
+  /* Banner ajustado */
+  .neon-glass {
+    padding: 22px !important;
+    flex-direction: column;
+    text-align: center;
+    gap: 18px;
+  }
+
+  .banner-left h2 {
+    font-size: 22px !important;
+    line-height: 26px !important;
+  }
+
+  .banner-left p {
+    font-size: 14px !important;
+    max-width: 260px !important;
+    margin: 0 auto;
+  }
+
+  .banner-illustration img {
+    width: 150px !important;
+  }
+
+  /* Cards totalmente responsivos */
+  .cards {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+  }
+
+  .card {
+    width: 100% !important;
+    padding: 22px !important;
+    border-radius: 18px !important;
+  }
+
+  .card h3 {
+    font-size: 18px !important;
+  }
+
+  .card p {
+    font-size: 13px !important;
+  }
+}
+
+
+}

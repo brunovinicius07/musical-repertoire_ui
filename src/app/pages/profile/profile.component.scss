@@ -1,0 +1,516 @@
+@import "../../../styles/variables.scss";
+
+/* ================================
+   WRAPPER PRINCIPAL
+================================ */
+.profile-wrapper {
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  flex-direction: column;
+  background: #fff;
+  max-width: 900px;     /* ajuste como preferir: 900px, 1000px, 1100px */
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.04);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ================================
+   HEADER
+================================ */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+
+  h2 {
+    font-size: 26px;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 14px;
+    color: #777;
+    margin-top: -3px;
+  }
+}
+
+.header-actions {
+  display: flex;
+  gap: 18px;
+
+  .header-btn {
+    background: transparent;
+    border: none;
+    font-size: 16px;         /* Aumentado */
+    font-weight: 600;        /* Mais forte */
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 14px;       /* Área clicável maior */
+    border-radius: 6px;
+    transition: 0.2s ease;
+
+    &.edit { color: $primary-color; }
+    &.delete { color: #e03b3b; }
+
+    &:hover {
+      opacity: 0.75;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+/* ================================
+   GRID PRINCIPAL
+================================ */
+.profile-content {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* ================================
+   FORM
+================================ */
+.form-area {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  label {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  input {
+    background: #f4f4f4;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    transition: background 0.3s ease;
+
+    &[readonly] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.password-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  label { cursor: pointer; }
+}
+
+.password-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ================================
+   BUTTONS
+================================ */
+.btn-primary {
+  background: $primary-color;
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: #eee;
+  color: #333;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* ================================
+   PROFILE CARD LATERAL
+================================ */
+.profile-card {
+  flex-shrink: 0;
+  position: sticky;
+  top: 40px;
+  width: 260px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+
+  .avatar {
+     width: 160px;
+     height: 160px;      /* garante formato uniforme */
+     border-radius: 50%; /* transforma em círculo */
+     object-fit: cover;  /* corta certinho dentro do círculo */
+     margin-bottom: 15px;
+  }
+
+  h3 {
+    margin-bottom: 12px;
+    font-size: 18px;
+  }
+
+  .btn-outline {
+    border: 1px solid $primary-color;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: transparent;
+    color: $primary-color;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.5);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal {
+  background: #fff;
+  padding: 30px;
+  width: 350px;
+  border-radius: 12px;
+  text-align: center;
+  animation: fadeIn 0.2s ease-in;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #555;
+    margin-bottom: 25px;
+  }
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+
+  .btn-secondary,
+  .btn-danger {
+    width: 120px;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .btn-secondary {
+    background: #eee;
+    color: #333;
+  }
+
+  .btn-danger {
+    background: #e03b3b;
+    color: #fff;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ==========================================
+   🌙 DARK MODE — TEMA ESCURO COMPLETO
+========================================== */
+
+:host-context(.dark-mode) .profile-card {
+  background: #2b2b2f !important; /* mesmo tom dos cards da dashboard */
+  border: 1px solid rgba(255,255,255,0.05) !important;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.35) !important;
+}
+
+:host-context(.dark-mode) .profile-card h3 {
+  color: #fff !important;
+}
+
+:host-context(.dark-mode) .profile-card .btn-outline {
+  color: #bb86fc !important;
+  border-color: #bb86fc !important;
+}
+
+:host-context(.dark-mode) .profile-card .btn-outline:hover {
+  background: rgba(187,134,252,0.12) !important;
+}
+
+:host-context(.dark-mode) .profile-wrapper {
+  background: #2b2b2f !important; /* tom certo agora */
+  box-shadow: 0px 20px 40px rgba(0,0,0,0.6) !important;
+  border: 1px solid rgba(255,255,255,0.04) !important;
+}
+
+:host-context(.dark-mode) input {
+  background: #1f1f1f !important;
+  color: #eaeaea !important;
+}
+
+:host-context(.dark-mode) label {
+  color: #ccc !important;
+}
+
+:host-context(.dark-mode) .modal {
+  background: #2b2b2f !important;
+  border: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+:host-context(.dark-mode) .modal h3 {
+  color: #ffffff !important;
+}
+
+:host-context(.dark-mode) .modal p {
+  color: #cccccc !important;
+}
+
+.mobile-avatar {
+  display: none;
+}
+
+@media (max-height: 820px) {
+
+  /* Só encolhe se a classe .compacto estiver ativada */
+  .profile-wrapper.compacto {
+    padding: 30px !important;
+    max-width: 960px !important;
+  }
+
+  .profile-wrapper.compacto .profile-header {
+    margin-bottom: 15px !important;
+  }
+
+  .profile-wrapper.compacto .profile-header h2 {
+    font-size: 22px !important;
+  }
+
+  .profile-wrapper.compacto .profile-header p {
+    font-size: 12px !important;
+  }
+
+  /* GRID mais apertado somente no compacto */
+  .profile-wrapper.compacto .profile-content {
+    gap: 20px !important;
+    grid-template-columns: 1fr 240px !important;
+  }
+
+  /* FORM menor só no compacto */
+  .profile-wrapper.compacto .form-area {
+    gap: 10px !important;
+  }
+
+  .profile-wrapper.compacto .form-area input {
+    padding: 9px 10px !important;
+    font-size: 13px !important;
+  }
+
+  .profile-wrapper.compacto label {
+    font-size: 12px !important;
+  }
+
+  /* CAMPOS DE SENHA compactos */
+  .profile-wrapper.compacto .password-fields {
+    gap: 6px !important;
+  }
+
+  /* BOTÕES compactos */
+  .profile-wrapper.compacto .btn-primary,
+  .profile-wrapper.compacto .btn-secondary {
+    padding: 10px !important;
+    font-size: 14px !important;
+  }
+
+  /* CARD lateral menor SOMENTE no compacto */
+  .profile-wrapper.compacto .profile-card {
+    width: 220px !important;
+    padding: 16px !important;
+  }
+
+  .profile-wrapper.compacto .profile-card .avatar {
+    width: 120px !important;
+  }
+
+  .profile-wrapper.compacto .profile-card h3 {
+    font-size: 15px !important;
+  }
+
+  .profile-wrapper.compacto .profile-card .btn-outline {
+    padding: 6px 10px !important;
+    font-size: 13px !important;
+  }
+
+}
+
+/* ============================================================
+   📱 MOBILE — até 600px
+   Ajuste completo: card, avatar mobile circular e responsividade
+===============================================================*/
+@media (max-width: 600px) {
+
+  /* Wrapper cresce naturalmente */
+  .profile-wrapper {
+    max-width: 100% !important;
+    padding: 20px !important;
+    border-radius: 16px !important;
+
+    /* ESSENCIAL ➜ permite o card crescer */
+    max-height: none !important;
+    overflow: visible !important;
+
+    position: relative !important;
+
+    /* Card centralizado no modo normal */
+    margin-top: 40px !important;
+
+    transition: margin 0.25s ease-in-out;
+  }
+
+  /* Quando tiver muitos campos (alterar senha ativo) → card sobe */
+  .profile-wrapper.editing-password {
+    margin-top: -10px !important;
+  }
+
+  /* GRADE vira coluna */
+  .profile-content {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 16px !important;
+  }
+
+  /* FORM full width */
+  .form-area {
+    width: 100% !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    gap: 12px !important;
+  }
+
+  .form-area input {
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+  }
+
+  .password-fields {
+    gap: 8px !important;
+  }
+
+  /* Botões 100% */
+  .btn-primary,
+  .btn-secondary {
+    width: 100% !important;
+    padding: 12px !important;
+    font-size: 15px !important;
+  }
+
+  /* Oculta CARD lateral do DESKTOP */
+  .profile-card {
+    display: none !important;
+  }
+
+  /* HEADER centralizado */
+  .profile-header {
+    margin-top: 0 !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    align-items: center !important;
+  }
+
+  /* ============================================================
+     🎨 AVATAR MOBILE — CIRCULAR COM ÍCONE DE LÁPIS
+  ============================================================ */
+
+  .mobile-avatar {
+    width: 100%;
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: -60px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .avatar-wrapper {
+    position: relative;
+    width: 110px;
+    height: 110px;
+  }
+
+  /* Avatar circular */
+  .avatar-mobile-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #eee;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+
+  /* Botão flutuante (ícone lápis) */
+  .edit-avatar-mobile {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: #6c00ff;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.25);
+  }
+
+  .edit-avatar-mobile:hover {
+    opacity: 0.85;
+  }
+
+  /* Quando alterar senha está ativo → avatar some */
+  .profile-wrapper.editing-password .mobile-avatar {
+    display: none !important;
+  }
+}

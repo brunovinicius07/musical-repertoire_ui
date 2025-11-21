@@ -1,13 +1,20 @@
 import { Routes } from '@angular/router';
+
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
-import { UserComponent } from './pages/user/user.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { AuthGuard } from './service/auth-guard.service';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+
+import { DashboardLayoutComponent } from './components/dashboard-layout/dashboard-layout.component';
+
+import { AuthGuard } from './service/auth-guard.service';
+
+import { PlaceholderComponent } from './pages/placeholder/placeholder.component';
 
 export const routes: Routes = [
+
   {
     path: "login",
     component: LoginComponent
@@ -20,14 +27,38 @@ export const routes: Routes = [
     path: "forgot-password",
     component: ForgotPasswordComponent
   },
+
   {
-  path: "dashboard",
-  component: DashboardComponent,
-  canActivate: [AuthGuard]
-},
-{
-  path: "user",
-  component: UserComponent,
-  canActivate: [AuthGuard]
-}
+    path: "",
+    component: DashboardLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: "dashboard",
+        component: DashboardComponent
+      },
+      {
+        path: "repertorios",
+        component: PlaceholderComponent
+      },
+      {
+        path: "musicas",
+        component: PlaceholderComponent
+      },
+      {
+        path: "agenda",
+        component: PlaceholderComponent
+      },
+      {
+        path: "perfil",
+        component: ProfileComponent
+      },
+
+      // Redirecionamento padrão
+      { path: "", redirectTo: "dashboard", pathMatch: "full" }
+    ]
+  },
+
+  // Página não encontrada
+  { path: "**", redirectTo: "dashboard" }
 ];

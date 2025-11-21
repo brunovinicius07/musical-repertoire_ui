@@ -1,86 +1,24 @@
-<div
-  class="dashboard-container"
-  [class.collapsed]="sidebarCollapsed"
->
+<section class="welcome-banner neon-glass">
+  <div class="banner-left">
+    <h2>Olá, {{ userName }}</h2>
+    <p>Bem-vindo ao seu painel do PlayIt. Modernize seu repertório!</p>
+  </div>
 
-  <aside class="sidebar">
+  <div class="banner-illustration">
+    <img src="/assets/img/main-inlustration.png" />
+  </div>
+</section>
 
-    <div class="top-controls">
-      <button class="toggle-line-btn" (click)="toggleSidebar()">
-        <span></span>
-      </button>
+<section class="cards">
+  <div class="card purple">
+    <i class="ph ph-music-notes card-icon"></i>
+    <h3>Seus Repertórios</h3>
+    <p>Organize blocos, sets e listas de música.</p>
+  </div>
 
-      <button class="theme-btn" (click)="toggleDarkMode()">
-        <i class="ph" [ngClass]="darkMode ? 'ph-sun' : 'ph-moon'"></i>
-      </button>
-    </div>
-
-    <div class="logo-area">
-      <ng-container *ngIf="!sidebarCollapsed; else miniLogo">
-        <img src="assets/img/logo 01.png" class="logo-full" />
-      </ng-container>
-
-      <ng-template #miniLogo>
-        <img src="assets/img/favicon.png" class="logo-mini" />
-      </ng-template>
-    </div>
-
-    <div class="menu-divider"></div>
-
-    <nav>
-      <a routerLink="/dashboard" routerLinkActive="active">
-        <i class="ph ph-gauge"></i>
-        <span *ngIf="!sidebarCollapsed">Painel</span>
-      </a>
-
-      <a routerLink="/musicas" routerLinkActive="active">
-        <i class="ph ph-music-notes-plus"></i>
-        <span *ngIf="!sidebarCollapsed">Suas Músicas</span>
-      </a>
-
-      <a routerLink="/musicos" routerLinkActive="active">
-        <i class="ph ph-users-three"></i>
-        <span *ngIf="!sidebarCollapsed">Seus Músicos</span>
-      </a>
-
-      <a routerLink="/perfil" routerLinkActive="active">
-        <i class="ph ph-user-circle"></i>
-        <span *ngIf="!sidebarCollapsed">Seu Perfil</span>
-      </a>
-    </nav>
-
-    <div class="logout" (click)="logout()">
-      <i class="ph ph-sign-out"></i>
-      <span *ngIf="!sidebarCollapsed">Sair</span>
-    </div>
-
-  </aside>
-
-  <main class="content">
-
-    <section class="welcome-banner neon-glass">
-      <div class="banner-left">
-        <h2>Olá, {{ userName }}</h2>
-        <p>Bem-vindo ao seu painel do PlayIt. Modernize seu repertório!</p>
-      </div>
-
-      <div class="banner-illustration">
-        <img src="/assets/img/main-inlustration.png" />
-      </div>
-    </section>
-
-    <section class="cards">
-      <div class="card purple">
-        <i class="ph ph-music-notes card-icon"></i>
-        <h3>Seus Repertórios</h3>
-        <p>Organize blocos, sets e listas de música.</p>
-      </div>
-
-      <div class="card blue">
-        <i class="ph ph-calendar-check card-icon"></i>
-        <h3>Agenda de Shows</h3>
-        <p>Gerencie datas, locais e horários.</p>
-      </div>
-    </section>
-  </main>
-</div>
+  <div class="card blue">
+    <i class="ph ph-calendar-check card-icon"></i>
+    <h3>Agenda de Shows</h3>
+    <p>Gerencie datas, locais e horários.</p>
+  </div>
+</section>

@@ -12,19 +12,16 @@ interface LoginForm {
 }
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    DefaultLoginLayoutComponent,
-    ReactiveFormsModule,
-    PrimaryInputComponent
-  ],
-  providers: [
-    LoginService
-  ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
-})
+    selector: 'app-login',
+    standalone: true,
+    imports: [
+      DefaultLoginLayoutComponent,
+      ReactiveFormsModule,
+      PrimaryInputComponent
+    ],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
+  })
 export class LoginComponent {
   loginForm!: FormGroup<LoginForm>;
 
@@ -39,15 +36,19 @@ export class LoginComponent {
     })
   }
 
-  submit(){
-      this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
-    next: () => {
-      this.toastService.success("Login realizado com sucesso!");
-      this.router.navigate(["/dashboard"]);   // 🔥 aqui
-    },
-    error: () => this.toastService.error("Email ou senha inválidos!")
-  });
-
+  submit() {
+    this.loginService.login(
+      this.loginForm.value.email!,
+      this.loginForm.value.password!
+    )
+    .subscribe({
+      next: () => {
+        this.router.navigate(["/dashboard"]);
+      },
+      error: () => {
+        this.toastService.error("Email ou senha inválidos!");
+      }
+    });
   }
 
   navigate(){

@@ -11,16 +11,21 @@ export class LoginService {
   constructor(private httpClient: HttpClient) { }
   apiUrl: string = "http://localhost:8080/v1/music/auth";
 
-  login(email: string, password: string){
-  return this.httpClient.post<LoginResponse>(this.apiUrl + "/login", {email, password}).pipe(
-    tap((value) => {
-      sessionStorage.setItem("auth-token", value.token);
-      sessionStorage.setItem("idUser", String(value.idUser));
-      sessionStorage.setItem("username", value.nameUser);
-      sessionStorage.setItem("role", value.role);
-    })
-  )
-}
+  login(email: string, password: string) {
+    return this.httpClient
+      .post<LoginResponse>(this.apiUrl + "/login", { email, password })
+      .pipe(
+        tap((value) => {
+          localStorage.setItem("auth-token", value.token);
+          localStorage.setItem("idUser", String(value.idUser));
+          localStorage.setItem("username", value.nameUser);
+          localStorage.setItem("role", value.role);
+
+        })
+      );
+  }
+
+
 
 
   signup(nameUser: string, email: string, password: string, confirmNewPassword: string){
@@ -29,8 +34,12 @@ export class LoginService {
       { nameUser, email, password, confirmNewPassword }
     ).pipe(
       tap((value) => {
-        sessionStorage.setItem("auth-token", value.token);
-        sessionStorage.setItem("username", value.nameUser);
+        localStorage.setItem("auth-token", value.token);
+        localStorage.setItem("idUser", String(value.idUser));
+        localStorage.setItem("username", value.nameUser);
+        localStorage.setItem("role", value.role);
+
+
       })
     );
   }

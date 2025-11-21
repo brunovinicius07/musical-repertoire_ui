@@ -152,4 +152,67 @@ main {
     .form-section:has(app-primary-input:nth-child(4)) .btn-secondary {
         margin-top: -5px !important;
     }
+
+        /* ===============================================================
+      📱 Ajuste fino — iPhone 5/SE (320px)
+      (entre o que estava antes e o último ajuste)
+    ================================================================ */
+    @media (max-width: 360px) {
+
+      main {
+        padding-top: 22px !important;   /* antes era 10px — agora mais equilibrado */
+      }
+
+      .form-section {
+        padding: 0 18px !important;
+        margin-top: -5px !important;    /* antes era -15px — agora apenas -5px */
+      }
+
+      /* Logo */
+      .form-section img {
+        margin-bottom: 12px !important; /* estava 8px — agora mais natural */
+        max-width: 120px !important;
+      }
+
+      /* Título */
+      .form-section h2 {
+        font-size: 18px !important;
+        margin-bottom: 20px !important; /* estava 16px */
+      }
+
+      /* Inputs */
+      app-primary-input {
+        margin-bottom: 8px !important;  /* estava 6px */
+      }
+
+      form {
+        gap: 18px !important;           /* antes 14px — agora mais espaçado */
+        margin-bottom: 16px !important; /* antes 10px — agora mais confortável */
+      }
+
+      form span {
+        font-size: 13px !important;
+        margin-top: -2px !important;
+      }
+
+      .btn-wrapper {
+        gap: 20px !important;           /* estava 14px — agora mais alinhado */
+        margin-top: 4px !important;     /* antes 0 */
+      }
+
+      .btn-wrapper button {
+        padding: 12px !important;       /* antes 10px — agora padrão visual */
+        font-size: 15px !important;
+      }
+
+      .divider {
+        margin-top: 0 !important;
+        margin-bottom: 2px !important;
+      }
+
+      .btn-secondary {
+        margin-top: 0 !important;
+      }
+    }
+    
 }

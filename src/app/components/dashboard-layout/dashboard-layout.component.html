@@ -1,1 +1,72 @@
-<p>dashboard-layout works!</p>
+<div class="dashboard-container" [class.collapsed]="sidebarCollapsed">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- TOP BUTTONS -->
+    <div class="top-controls">
+      <button class="toggle-line-btn" (click)="toggleSidebar()">
+        <span></span>
+      </button>
+
+      <button class="theme-btn" (click)="toggleDarkMode()">
+        <i class="ph" [ngClass]="darkMode ? 'ph-sun' : 'ph-moon'"></i>
+      </button>
+    </div>
+
+    <!-- LOGO -->
+    <div class="logo-area">
+      <ng-container *ngIf="!sidebarCollapsed; else iconMini">
+        <img src="assets/img/logo 01.png" class="logo-full" />
+      </ng-container>
+
+      <ng-template #iconMini>
+        <img src="assets/img/favicon.png" class="logo-mini" />
+      </ng-template>
+    </div>
+
+    <!-- DIVISOR -->
+    <div class="menu-divider"></div>
+
+    <!-- MENU -->
+    <nav>
+      <a routerLink="/dashboard" routerLinkActive="active">
+        <i class="ph ph-gauge"></i>
+        <span *ngIf="!sidebarCollapsed">Painel</span>
+      </a>
+
+      <a routerLink="/repertorios" routerLinkActive="active">
+        <i class="ph ph-music-notes"></i>
+        <span *ngIf="!sidebarCollapsed">Repertórios</span>
+      </a>
+
+      <a routerLink="/agenda" routerLinkActive="active">
+        <i class="ph ph-calendar"></i>
+        <span *ngIf="!sidebarCollapsed">Agenda</span>
+      </a>
+
+      <a routerLink="/musicas" routerLinkActive="active">
+        <i class="ph ph-music-notes-plus"></i>
+        <span *ngIf="!sidebarCollapsed">Músicas</span>
+      </a>
+
+      <a routerLink="/perfil" routerLinkActive="active">
+        <i class="ph ph-user-circle"></i>
+        <span *ngIf="!sidebarCollapsed">Perfil</span>
+      </a>
+    </nav>
+
+    <!-- LOGOUT -->
+    <div class="logout" (click)="logout()">
+      <i class="ph ph-sign-out"></i>
+      <span *ngIf="!sidebarCollapsed">Sair</span>
+    </div>
+
+  </aside>
+
+  <!-- CONTENT AREA (DINÂMICA) -->
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

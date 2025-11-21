@@ -1,0 +1,113 @@
+<div class="profile-wrapper" [class.compacto]="showPasswordFields">
+
+  <!-- 🔥 AVATAR MOBILE — no topo do card -->
+  <div class="mobile-avatar" *ngIf="shouldShowAvatar()">
+    <div class="avatar-wrapper">
+      <img src="/assets/img/ro.jpg" class="avatar-mobile-img" />
+
+      <button class="edit-avatar-mobile" (click)="openImageModal()">
+        <i class="ph ph-pencil-simple"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div class="profile-header">
+    <div>
+      <h2>Meu Perfil</h2>
+      <p>Gerencie suas informações pessoais</p>
+    </div>
+
+    <div class="header-actions">
+      <button class="header-btn edit" (click)="enableEditMode()">
+        <i class="ph ph-pencil-simple"></i> Editar Perfil
+      </button>
+
+      <button class="header-btn delete" (click)="openDeleteModal()">
+        <i class="ph ph-trash"></i> Excluir Conta
+      </button>
+    </div>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div class="profile-content">
+
+    <!-- Formulário -->
+    <form [formGroup]="form" class="form-area">
+
+      <label>Nome</label>
+      <input type="text" formControlName="nameUser" [readonly]="!editMode" />
+
+      <label>Email</label>
+      <input type="email" formControlName="email" [readonly]="!editMode" />
+
+      <!-- Alterar senha -->
+      <div class="password-toggle" *ngIf="editMode">
+        <input type="checkbox" id="changePassword" formControlName="changePassword" />
+        <label for="changePassword">Alterar senha</label>
+      </div>
+
+      <!-- Campos da senha -->
+      <div class="password-fields" *ngIf="showPasswordFields">
+
+        <label>Senha atual</label>
+        <input type="password" formControlName="currentPassword" />
+
+        <label>Nova senha</label>
+        <input type="password" formControlName="newPassword" />
+
+        <label>Confirmar nova senha</label>
+        <input type="password" formControlName="confirmNewPassword" />
+
+      </div>
+
+      <!-- Botões -->
+      <button *ngIf="editMode" class="btn-primary" type="button" (click)="salvar()">
+        Salvar Alterações
+      </button>
+
+      <button *ngIf="editMode" class="btn-secondary" type="button" (click)="cancelEdit()">
+        Cancelar
+      </button>
+
+    </form>
+
+    <!-- Avatar Desktop -->
+    <div class="profile-card">
+      <img class="avatar" src="/assets/img/ro.jpg" alt="avatar" />
+
+      <h3>{{ userName }}</h3>
+
+      <button class="btn-outline" (click)="openImageModal()">
+        Alterar Imagem
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Modal imagem -->
+<div class="modal-backdrop" *ngIf="showImageModal">
+  <div class="modal">
+    <h3>Alterar Imagem</h3>
+    <p>Essa funcionalidade ainda será implementada.</p>
+    <button class="btn-primary" (click)="closeImageModal()">Fechar</button>
+  </div>
+</div>
+
+<!-- Modal deletar -->
+<div class="modal-backdrop" *ngIf="showDeleteModal">
+  <div class="modal">
+    <h3>Apagar Conta</h3>
+    <p>
+      Tem certeza que deseja excluir sua conta?<br />
+      <strong>Essa ação é irreversível.</strong>
+    </p>
+
+    <div class="modal-actions">
+      <button class="btn-secondary" (click)="closeDeleteModal()">Cancelar</button>
+      <button class="btn-danger" (click)="confirmDelete()">Apagar</button>
+    </div>
+  </div>
+</div>
